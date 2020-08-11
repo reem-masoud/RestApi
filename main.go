@@ -9,11 +9,11 @@ import (
 //"strconv"
 
 func main() {
-	routes.init()
+	//routes.init()
 
 	fmt.Println("Running...")
-	routes.Router()
+	e := routes.Router()
 
-	e.Logger.Fatal(e.Start(":1221"))
+	e.Logger.Fatal(e.Start(":1448"))
 
 }

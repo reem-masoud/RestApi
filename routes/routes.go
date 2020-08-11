@@ -5,6 +5,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"github.com/restapi/api"
 )
 
 var e *echo.Echo
@@ -26,20 +27,21 @@ func init() {
 func Router() *echo.Echo {
 
 	//API groups
-	products := e.Group("/api/products")
-	merchants := e.Group("api/merchants")
+	v1 := e.Group("/api/v1")
+	merchants := v1.Group("/merchants")
+	products := v1.Group("/products")
 
-	merchants.GET("/", api.getMerchants)
-	merchants.POST("/", api.postMerchant)
-	merchants.GET("/:id", api.getMerchant)
-	merchants.PUT("/:id", api.putMerchant)
-	merchants.DELETE("/:id", deleteMerchant)
+	merchants.GET("/", api.GetMerchants)
+	merchants.POST("/", api.PostMerchant)
+	merchants.GET("/:id", api.GetMerchant)
+	merchants.PUT("/:id", api.PutMerchant)
+	merchants.DELETE("/:id", api.DeleteMerchant)
 
-	products.GET("/", api.getProducts)
-	cats.POST("/", api.postProduct)
-	cats.GET("/:id", api.getProduct)
-	cats.PUT("/:id", api.putProduct)
-	cats.DELETE("/:id", api.deleteProduct)
+	products.GET("/", api.GetProducts)
+	products.POST("/", api.PostProduct)
+	products.GET("/:id", api.GetProduct)
+	products.PUT("/:id", api.PutProduct)
+	products.DELETE("/:id", api.DeleteProduct)
 
 	return e
 }
